@@ -1,10 +1,11 @@
 /**********************************************************************************************************************
  *  FILE DESCRIPTION
  *  -----------------------------------------------------------------------------------------------------------------*/
-/**        \file  FileName.c
- *        \brief
- *
- *      \details
+/**    @file  main.c
+ *     @author Mohammed Khaled Makbool
+ *     @brief  program to blink led and change color
+ * 
+ *     @details
  *
  *
  *********************************************************************************************************************/
@@ -30,6 +31,7 @@
 /**********************************************************************************************************************
  *  LOCAL FUNCTION PROTOTYPES
  *********************************************************************************************************************/
+int delayms(int t);
 
 /**********************************************************************************************************************
  *  LOCAL FUNCTIONS
@@ -40,29 +42,27 @@
  *********************************************************************************************************************/
 
 /******************************************************************************
- * \Syntax          : Std_ReturnType FunctionName(AnyType parameterName)
- * \Description     : Describe this service
+ * \Syntax          : int delayms(int)
+ * \Description     : dumy delay using processor cycles
  *
- * \Sync\Async      : Synchronous
- * \Reentrancy      : Non Reentrant
- * \Parameters (in) : parameterName   Parameter Describtion
- * \Parameters (out): None
- * \Return value:   : Std_ReturnType  E_OK
- *                                    E_NOT_OK
+ * \Parameters (in) : t   time to delay in millisecond
  *******************************************************************************/
-int delayms(int t);
 
-int delayms(int t)
+void delayms(int t)
 {
-	
-	volatile uint64_t x, y,f;
+	volatile uint64_t x, y, f;
 	for (x = 0; x < t; x++)
 		for (y = 0; y < 790; y++)
-			f=y;
-	
-	return f;
+			f = y;
+
 }
 
+
+/******************************************************************************
+ * \Syntax          : int main()
+ * \Description     : the main fun. of the program
+ *
+ *******************************************************************************/
 int main()
 {
 	SYSCTL->RCC |= 0x02400540;
@@ -71,13 +71,13 @@ int main()
 	GPIOF->DEN |= 0xFF;
 	while (1)
 	{
-		GPIO_Mak_WritePin(PORTF,PIN2,1U);
+		GPIO_Mak_DigitalWritePin(PORTF, PIN2, 1U);
 		delayms(1000);
-		GPIO_Mak_WritePin(PORTF,PIN3,1U);
+		GPIO_Mak_DigitalWritePin(PORTF, PIN3, 1U);
 		delayms(1000);
-		GPIO_Mak_WritePin(PORTF,PIN2,0U);
+		GPIO_Mak_DigitalWritePin(PORTF, PIN2, 0U);
 		delayms(1000);
-		GPIO_Mak_WritePin(PORTF,PIN3,0U);
+		GPIO_Mak_DigitalWritePin(PORTF, PIN3, 0U);
 		delayms(1000);
 	}
 }
