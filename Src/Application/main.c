@@ -31,7 +31,7 @@
 /**********************************************************************************************************************
  *  LOCAL FUNCTION PROTOTYPES
  *********************************************************************************************************************/
-int delayms(int t);
+void delayms(int t);
 
 /**********************************************************************************************************************
  *  LOCAL FUNCTIONS
@@ -54,7 +54,6 @@ void delayms(int t)
 	for (x = 0; x < t; x++)
 		for (y = 0; y < 790; y++)
 			f = y;
-
 }
 
 
@@ -71,13 +70,17 @@ int main()
 	GPIOF->DEN |= 0xFF;
 	while (1)
 	{
-		GPIO_Mak_DigitalWritePin(PORTF, PIN2, 1U);
+		GPIO_Mak_DigitalWritePin(PORTF, PIN1, HIGH);
 		delayms(1000);
-		GPIO_Mak_DigitalWritePin(PORTF, PIN3, 1U);
+		GPIO_Mak_DigitalWritePin(PORTF, PIN2, HIGH);
 		delayms(1000);
-		GPIO_Mak_DigitalWritePin(PORTF, PIN2, 0U);
+		GPIO_Mak_DigitalWritePin(PORTF, PIN3, HIGH);
 		delayms(1000);
-		GPIO_Mak_DigitalWritePin(PORTF, PIN3, 0U);
+		GPIO_Mak_DigitalWritePin(PORTF, PIN1, LOW);
+		delayms(1000);
+		GPIO_Mak_DigitalWritePin(PORTF, PIN2, LOW);
+		delayms(1000);
+		GPIO_Mak_DigitalWritePin(PORTF, PIN3, LOW);
 		delayms(1000);
 	}
 }
