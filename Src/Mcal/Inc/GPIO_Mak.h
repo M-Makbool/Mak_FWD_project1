@@ -38,9 +38,11 @@
 #define PIN6 6U
 #define PIN7 7U
 
-#define DIR_OUT 1U
-#define DIR_IN 0U
+#define OUTPUT 1U
+#define INPUT 0U
 
+#define HIGH 1U
+#define LOW 0U
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION MACROS
  *********************************************************************************************************************/
@@ -64,8 +66,10 @@
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION PROTOTYPES
  *********************************************************************************************************************/
-void GPIO_Mak_WritePort(uint8_t portName, uint8_t portLevel);
-
+void GPIO_Mak_DigitalWritePort(uint8_t portName, uint8_t portLevel);
+void GPIO_Mak_DigitalWritePin(uint8_t portName, uint8_t pinName, uint8_t portLevel);
+void GPIO_Mak_PortMode(uint8_t portName, uint8_t portLevel);
+void GPIO_Mak_PinMode(uint8_t portName, uint8_t pinName, uint8_t portLevel);
  
 #endif  /* GPIO_Mak_H */
 

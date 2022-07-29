@@ -55,25 +55,29 @@ int delayms(int t);
 int delayms(int t)
 {
 	
-	int x, y;
-	for (x = 0; x < t; x++){
-		for (y = 0; y < 79000; y++)
-			{int ff;}
-	}			
-	return 0;
+	volatile uint64_t x, y,f;
+	for (x = 0; x < t; x++)
+		for (y = 0; y < 790; y++)
+			f=y;
+	
+	return f;
 }
 
 int main()
 {
 	SYSCTL->RCC |= 0x02400540;
 	SYSCTL->RCGCGPIO |= 0x20;
-	GPIOF->DIR |= 0x02;
-	GPIOF->DEN |= 0x02;
+	GPIOF->DIR |= 0xFF;
+	GPIOF->DEN |= 0xFF;
 	while (1)
 	{
-		GPIO_Mak_WritePort(PORTF,0x02);
+		GPIO_Mak_WritePin(PORTF,PIN2,1U);
 		delayms(1000);
-		GPIO_Mak_WritePort(PORTF,0x00);
+		GPIO_Mak_WritePin(PORTF,PIN3,1U);
+		delayms(1000);
+		GPIO_Mak_WritePin(PORTF,PIN2,0U);
+		delayms(1000);
+		GPIO_Mak_WritePin(PORTF,PIN3,0U);
 		delayms(1000);
 	}
 }
