@@ -1,10 +1,10 @@
 /**********************************************************************************************************************
  *  FILE DESCRIPTION
  *  -----------------------------------------------------------------------------------------------------------------*/
-/**        \file  FileName.c
- *        \brief
+/** @file  GPIO_Mak.c
+ *  @brief
  *
- *      \details
+ *  @details
  *
  *
  *********************************************************************************************************************/
@@ -12,8 +12,6 @@
 /**********************************************************************************************************************
  *  INCLUDES
  *********************************************************************************************************************/
-#include "stdint.h"
-#include "TM4C123.h"
 #include "GPIO_Mak.h"
 /**********************************************************************************************************************
  *  LOCAL MACROS CONSTANT\FUNCTION
@@ -47,37 +45,33 @@
  * \Reentrancy      : Non Reentrant
  * \Parameters (in) : parameterName   Parameter Describtion
  * \Parameters (out): None
- * \Return value:   : Std_ReturnType  E_OK
- *                                    E_NOT_OK
+ * \Return value:   : void
  *******************************************************************************/
-int delayms(int t);
-
-int delayms(int t)
+void GPIO_Mak_WritePort(uint8_t portName, uint8_t portLevel)
 {
-	
-	int x, y;
-	for (x = 0; x < t; x++){
-		for (y = 0; y < 79000; y++)
-			{int ff;}
-	}			
-	return 0;
-}
-
-int main()
-{
-	SYSCTL->RCC |= 0x02400540;
-	SYSCTL->RCGCGPIO |= 0x20;
-	GPIOF->DIR |= 0x02;
-	GPIOF->DEN |= 0x02;
-	while (1)
+	switch (portName)
 	{
-		GPIO_Mak_WritePort(PORTF,0x02);
-		delayms(1000);
-		GPIO_Mak_WritePort(PORTF,0x00);
-		delayms(1000);
+	case PORTA:
+		GPIOA->DATA = portLevel;
+		break;
+	case PORTB:
+		GPIOB->DATA = portLevel;
+		break;
+	case PORTC:
+		GPIOC->DATA = portLevel;
+		break;
+	case PORTD:
+		GPIOD->DATA = portLevel;
+		break;
+	case PORTE:
+		GPIOE->DATA = portLevel;
+		break;
+	case PORTF:
+		GPIOF->DATA = portLevel;
+		break;
 	}
 }
 
 /**********************************************************************************************************************
- *  END OF FILE: main.c
+ *  END OF FILE: GPIO_Mak.c
  *********************************************************************************************************************/
