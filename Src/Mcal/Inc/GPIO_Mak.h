@@ -38,6 +38,9 @@
 #define PIN6 6U
 #define PIN7 7U
 
+#define ALL_OUTPUT 0xFF
+#define ALL_INPUT 0U
+
 #define OUTPUT 1U
 #define INPUT 0U
 

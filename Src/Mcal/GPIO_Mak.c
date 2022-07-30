@@ -38,14 +38,13 @@
  *********************************************************************************************************************/
 
 /******************************************************************************
- * \Syntax          : Std_ReturnType FunctionName(AnyType parameterName)
- * \Description     : Describe this service
+ * \Syntax          : void GPIO_Mak_DigitalWritePort(uint8_t portName, uint8_t portLevel)
+ * \Description     : Digital Write fun. for all pins of the port in one time
  *
- * \Sync\Async      : Synchronous
- * \Reentrancy      : Non Reentrant
- * \Parameters (in) : parameterName   Parameter Describtion
+ * \Parameters (in) : portName     The Name of The Port
+ *										portLevel    Level to Set The Port
  * \Parameters (out): None
- * \Return value:   : void
+ * \Return value:   : None
  *******************************************************************************/
 void GPIO_Mak_DigitalWritePort(uint8_t portName, uint8_t portLevel)
 {
@@ -79,6 +78,16 @@ void GPIO_Mak_DigitalWritePort(uint8_t portName, uint8_t portLevel)
 	}
 }
 
+/******************************************************************************
+ * \Syntax          : void GPIO_Mak_DigitalWritePin(uint8_t portName, uint8_t pinName, uint8_t portLevel)
+ * \Description     : Digital Write fun. for indevidual pins of the port
+ *
+ * \Parameters (in) : portName     The Name of The Port
+ *										pinName      The Pin Number
+ *										portLevel    Level to Set The Pin.   "HIGH" or "LOW"
+ * \Parameters (out): None
+ * \Return value:   : None
+ *******************************************************************************/
 void GPIO_Mak_DigitalWritePin(uint8_t portName, uint8_t pinName, uint8_t portLevel)
 {
 	switch (portName)
@@ -128,10 +137,17 @@ void GPIO_Mak_DigitalWritePin(uint8_t portName, uint8_t pinName, uint8_t portLev
 	}
 }
 
+/******************************************************************************
+ * \Syntax          : void GPIO_Mak_PortMode(uint8_t portName, uint8_t portLevel)
+ * \Description     : fun. to set Port Direction
+ *
+ * \Parameters (in) : portName     The Name of The Port
+ *										portLevel    Level to Set The Port pins.   "ALL_OUTPUT" or "ALL_INPUT" to set all pins of the port
+ * \Parameters (out): None
+ * \Return value:   : None
+ *******************************************************************************/
 void GPIO_Mak_PortMode(uint8_t portName, uint8_t portLevel)
 {
-	if (portLevel)
-		portLevel = 0xff;
 
 	switch (portName)
 	{

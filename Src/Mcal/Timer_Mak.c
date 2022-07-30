@@ -12,7 +12,7 @@
 /**********************************************************************************************************************
  *  INCLUDES
  *********************************************************************************************************************/
-//#include "Std_Types.h"
+#include "Timer_Mak.h"
 
 /**********************************************************************************************************************
  *  LOCAL MACROS CONSTANT\FUNCTION
@@ -49,9 +49,22 @@
  * \Return value:   : Std_ReturnType  E_OK
  *                                    E_NOT_OK
  *******************************************************************************/
-//Std_ReturnType FunctionName(AnyType parameterName)
-//{
-//}
+void Delay_Seconds(uint32_t timeSeconds)
+{
+	volatile uint32_t i;
+	for (i = 0; i < timeSeconds; i++)
+	{			
+		SYSCTL->RCGCTIMER |= 0x8;		//initialise Timer3
+		TIMER3->CTL &= ~(1 << 0);		// desable Timer3 to start config
+		TIMER3->CFG = 0x00000000;		// clear all old config
+		TIMER3->TAMR = 0x1;				// Set timer3 Mode to OneShot mode and count Down mode
+	//TIMER3->TAMR &= ~(1 << 4);		// Set Timer3 to count Down
+		TIMER3->TAILR = 0x00F42400;		// Timer3 start from 16,000,000 to zero with 16MhZ clk this will be 1 Second
+		TIMER3->CTL |= (1 << 0);		// enable Timer3 to start count
+		while ( (TIMER3->RIS & 0x00000001) != 1 );
+		TIMER3->ICR |= 0x1; 				// Clear timer3 counts
+	}
+}
 
 /**********************************************************************************************************************
  *  END OF FILE: FileName.c
